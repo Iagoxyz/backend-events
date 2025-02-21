@@ -19,6 +19,10 @@ public class EventService {
     }
 
     public List<Event> getAllEvents() {
-        
+        return eventRepository.findAll();
+    }
+
+    public Event getByPrettyName(String prettyName) {
+        return eventRepository.findByPrettyName(prettyName);
     }
 }
