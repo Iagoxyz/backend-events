@@ -1,6 +1,7 @@
 package br.com.nlw.events.controller;
 
 import br.com.nlw.events.dto.ErrorMessage;
+import br.com.nlw.events.dto.SubscriptionConflictException;
 import br.com.nlw.events.exception.EventNotFoundException;
 import br.com.nlw.events.model.Subscription;
 import br.com.nlw.events.model.User;
@@ -27,6 +28,8 @@ public class SubscriptionController {
             }
 
         } catch (EventNotFoundException e) {
+            return ResponseEntity.status(404).body(new ErrorMessage(e.getMessage()));
+        } catch (SubscriptionConflictException e) {
             return ResponseEntity.status(404).body(new ErrorMessage(e.getMessage()));
         }
         return ResponseEntity.badRequest().build();
